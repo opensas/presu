@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="presu">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/favicon.ico?v="2>
+    <title>Observatorio presupuestario - ASAP</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">-->
+
+    <!-- Custom styles for this template -->
+    <link href="css/treemap.css" rel="stylesheet">
+    <link href="css/bubbletree.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- fontello Custom icons - check: http://fontello.com -->
+    <link href="css/fontello-icons.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style id="holderjs-style" type="text/css"></style>
+
+  </head>
+
+  <body role="document" style="">
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#/">Observatorio presupuestario<i class="glyphicon glyphicon-chevron-right"></i></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#/quien">¿Quién?</a></li>
+            <li><a href="#/que">¿En qué?</a></li>
+            <li><a href="#/paraque">¿Para qué?</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/acerca">Acerca de</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+      <div class="row row-breadcrumb" >
+        <div class="container" >
+          <ol ng-show="breadcrumb.length" class="breadcrumb" ng-animate="{show:'animate-show', hide:'animate-hide'}">
+            <li><a href="#/">Inicio</a></li>
+            <li ng-repeat="b in breadcrumb">
+              <i class="glyphicon glyphicon-chevron-right"></i>
+              <a ng-show='b.link' ng-href="#/{{b.link | slug}}">{{b.name}}</a>
+              <span ng-hide='b.link'>{{b.name}}</span>
+            </li>
+            <li class="pull-right"><a><i class="glyphicon glyphicon-chevron-left"></i>Navegación</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" role="main">
+      <div class="row" >
+        <div class="col-md-12" ng-view></div>
+      </div>
+
+      <footer>
+        <div ng-show="breadcrumb.length" class="panel panel-default">
+          <div class="panel-body">
+            <i class="glyphicon glyphicon-exclamation-sign"></i> Valores expresados en millones de pesos. Información relevada el {{ data.lastupdate }}.
+          </div>
+        </div>
+
+<!--         <div id="compartir" class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-3 text-center">Compartir <i class="glyphicon glyphicon-chevron-right"></i></div>
+              <div class="col-sm-3 text-center" fb-like></div>
+              <div class="col-sm-3 text-center" google-plus></div>
+              <div class="col-sm-3 text-center" tweet="shareText"></div>
+            </div>
+          </div>
+        </div>
+ -->
+        <div class="panel panel-default">
+          <div class="panel-body text-center">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            <a class="btn btn-info btn-xs" href="#/ayuda">Ayuda</a>
+            <i class="glyphicon glyphicon-chevron-right"></i>
+            <b>Observatorio presupuestario</b>
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            <a class="btn btn-info btn-xs" href="#/acerca">Acerca del proyecto</a>
+            <i class="glyphicon glyphicon-chevron-right"></i>
+          </div>
+        </div>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/dimple.v2.0.0.min.js"></script>
+    <script src="js/d3.v3.min.js"></script>
+    <script src="js/d3plus.full-1.6.9.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-locale_es-ar.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+
+    <!-- Bubble -->
+    <script src="js/jquery.tooltip.min.js"></script>
+    <script src="js/raphael-min.js"></script>
+    <script src="js/Tween.js"></script>
+    <script src="js/bubbletree.custom.js"></script>
+    <script src="js/d3.treemap.custom.js"></script>
+    <script src="js/vis4.js"></script>
+
+    <script src='js/angulike.js'></script>
+
+    <script src="ng-client/presuApp.js"></script>
+
+    <script src="ng-client/modules/helpers/dataHelperService.js"></script>
+
+    <script src="ng-client/modules/home/homeCtrl.js"></script>
+    <script src="ng-client/modules/tabs/tabsCtrl.js"></script>
+    <script src="ng-client/modules/paginas/paginaCtrl.js"></script>
+
+    <script src="ng-client/modules/quien/quienService.js"></script>
+    <script src="ng-client/modules/quien/quienCtrl.js"></script>
+    <script src="ng-client/modules/quien/poderCtrl.js"></script>
+    <script src="ng-client/modules/quien/jurisdiccionCtrl.js"></script>
+    <script src="ng-client/modules/quien/administracionCtrl.js"></script>
+    <script src="ng-client/modules/quien/nivel1Ctrl.js"></script>
+    <script src="ng-client/modules/quien/nivel2Ctrl.js"></script>
+    <script src="ng-client/modules/quien/nivel3Ctrl.js"></script>
+
+    <script src="ng-client/modules/que/queService.js"></script>
+    <script src="ng-client/modules/que/queCtrl.js"></script>
+    <script src="ng-client/modules/que/incisoCtrl.js"></script>
+    <script src="ng-client/modules/que/principalCtrl.js"></script>
+
+    <script src="ng-client/modules/paraque/paraqueService.js"></script>
+    <script src="ng-client/modules/paraque/paraqueCtrl.js"></script>
+    <script src="ng-client/modules/paraque/finalidadCtrl.js"></script>
+    <script src="ng-client/modules/paraque/funcionCtrl.js"></script>
+
+  </body>
+</html>

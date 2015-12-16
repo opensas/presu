@@ -1,0 +1,67 @@
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43842335-3', 'auto');
+  ga('send', 'pageview');
+</script>
+<!--
+  <h2>
+    Ejecutado 2014
+    <small>$ {{mainEntity.total.anterior | number: 2}}</small>
+    <button type="button" class="btn btn-default btn-xs gasto-popover" data-container="body" data-toggle="popover" data-placement="right" data-title="Presupuestado" data-content="El total de crédito ejecutado correspondiente al ejercicio anterior.">
+    <span class="glyphicon glyphicon-question-sign"></span>
+    </button>
+  </h2>
+  <div class="progress">
+    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ ((mainEntity.total.anterior * 100) / mainEntity.total.presupuestado).toFixed(2)+'%'}}">
+      {{ ((mainEntity.total.anterior * 100) / mainEntity.total.presupuestado).toFixed(2)+'%'}}
+    </div>
+  </div>
+-->
+
+  <h2>
+    Presupuestado
+    <small>$ {{mainEntity.total.presupuestado | number: 2}}</small>
+    <button type="button" class="btn btn-default btn-xs gasto-popover" data-container="body" data-toggle="popover" data-placement="right" data-title="Presupuestado" data-content="El total de crédito presupuestado para todo el año vigente a la fecha.">
+    <span class="glyphicon glyphicon-question-sign"></span>
+    </button>
+  </h2>
+
+  <div class="progress">
+    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+      100%
+    </div>
+  </div>
+
+  <h2>
+    Comprometido
+    <small>$ {{mainEntity.total.comprometido | number: 2}}</small>
+    <button type="button" class="btn btn-default btn-xs gasto-popover" data-container="body" data-toggle="popover" data-placement="right" data-title="Presupuestado" data-content="El compromiso es la obligación potencial que el Estado contrae con un tercero, empresa o individuo, para adquirir un bien o servicio, transferir fondos o contratar personal. Es un gasto potencial similar a lo que significa una reserva. Se materializa generalmente a través de una Orden de Compra.">
+    <span class="glyphicon glyphicon-question-sign"></span>
+    </button>
+  </h2>
+
+  <div class="progress">
+    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ ((mainEntity.total.comprometido * 100) / mainEntity.total.presupuestado).toFixed(2)+'%'}}">
+      {{ ((mainEntity.total.comprometido * 100) / mainEntity.total.presupuestado).toFixed(2)+'%'}}
+    </div>
+  </div>
+
+  <h2>
+    Devengado
+    <small>$ {{mainEntity.total.devengado | number: 2}}</small>
+    <button type="button" class="btn btn-default btn-xs gasto-popover" data-container="body" data-toggle="popover" data-placement="right" data-title="Presupuestado" data-content="El devengado es la obligación de pago que surge cuando se reciben los bienes o servicios pactados en la Orden de Compra o cuando se ordena liquidar haberes o jubilaciones. El proveedor entrega los bienes junto con su factura, el Estado los recibe y a partir de ahí se genera la obligación de pago (Orden de Pago) que se registra como devengado. El concepto de gasto devengado es independiente de la efectiva realización del pago.">
+    <span class="glyphicon glyphicon-question-sign"></span>
+    </button>
+  </h2>
+
+  <div class="progress">
+    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ ((mainEntity.total.devengado * 100) / mainEntity.total.presupuestado).toFixed(2)+'%'}}">
+      {{ ((mainEntity.total.devengado * 100) / mainEntity.total.presupuestado).toFixed(2)+'%'}}
+    </div>
+  </div>
+
+<hr />

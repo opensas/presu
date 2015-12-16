@@ -1,0 +1,75 @@
+/* treemap */
+#treemap {
+  width: 100%;
+}
+
+#treemap text {
+  pointer-events: none;
+}
+
+#treemap .grandparent text {
+  font-weight: bold;
+  fill: #ebebeb;
+  font-size: 20px;
+}
+
+#treemap rect {
+  fill: none;
+  stroke: #fff;
+}
+
+#treemap rect.parent,
+#treemap .grandparent rect {
+  stroke-width: 2px;
+}
+
+#treemap .grandparent rect {
+  fill: #df691a;
+}
+
+#treemap .grandparent:hover rect {
+  fill: #c85e17;
+}
+
+#treemap .children rect.parent,
+#treemap .grandparent rect {
+  cursor: pointer;
+}
+
+#treemap .children rect.parent {
+  fill-opacity: 1;
+}
+
+#treemap .children rect.parent:hover {
+  fill: #ff9900;
+  fill-opacity: .5;
+}
+
+/*#treemap .children:hover rect.child {
+  fill: #bbb;
+}*/
+
+.tooltip {
+  position: absolute;
+  opacity: 0.9;
+  z-index: 1000px;
+  width: 400px;
+  max-width: 400px;
+  height: 123px;
+  max-height: 123px;
+  font-weight: bold;
+  display: none;
+  pointer-events: none;
+}
+
+.tooltip:after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background-image: url('../img/arrow-tooltip.png');
+  background-repeat: no-repeat;
+  background-position: top center;
+  position: absolute;
+  bottom: -20px;
+  left: 190px;
+}
