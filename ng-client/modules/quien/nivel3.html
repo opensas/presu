@@ -1,0 +1,20 @@
+﻿<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43842335-3', 'auto');
+  ga('send', 'pageview');
+
+	</script>
+<div ng-controller="nivel3Ctrl" ng-init="init()">
+
+  <div class="page-header">
+    <h2>{{nivel3.name}}<small><i class="glyphicon glyphicon-chevron-right"></i>{{nivel3.id}}</small></h2>
+  </div>
+
+  <div ng-include="'ng-client/modules/partials/tabs.html?t='+$parent.rand" onload="partialLoaded()"></div>
+
+</div>
+

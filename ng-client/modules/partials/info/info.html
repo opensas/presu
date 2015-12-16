@@ -1,0 +1,181 @@
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43842335-3', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+      <div class="well well-sm">
+        Valores totales al {{ data.lastupdate }} (en millones de pesos)
+      </div>
+
+      <div class="row">
+
+        <div ng-repeat="concepto in data.conceptos" class="col-md-3">
+          <h3 class="text-center">
+            <small>
+              <i class="glyphicon glyphicon-chevron-right"></i>
+              $ {{mainEntity.total[concepto.name] | number: 1}}
+            </small>
+          </h3>
+          <h4 class="text-center">
+            {{concepto.title}}
+            <button type="button" class="btn btn-default btn-xs gasto-popover" data-container="body" data-toggle="popover" data-placement="right" data-title="{{concepto.title}}"
+            data-content="{{concepto.description}}">
+              <span class="glyphicon glyphicon-question-sign"></span>
+            </button>
+          </h4>
+          <div class="progress">
+            <div class="progress-bar {{concepto.clazz}} concepto-porcentaje" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ (mainEntity.total[concepto.name] * 100 / mainEntity.total.base).toFixed(2)+'%'}}">
+              {{ mainEntity.total['porcentaje_' + concepto.name] | number: 1 }}%
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-12">
+
+          <div class="well well-sm">
+            <i class="glyphicon glyphicon-hand-up"></i> Click para ver el detalle de la fila.<i class="glyphicon glyphicon-chevron-down"></i>
+          </div>
+
+          <table id="info-table" class="table table-hover table-info">
+            <thead>
+              <tr>
+                <th class="info-header">
+                  <span class="dropdown">
+                    <span data-toggle="dropdown">
+                      {{ currentEntity }}&nbsp;
+                      <span class="caret" ng-if="tablesort.concept!='id'"></span>
+                      <span class="glyphicon glyphicon-sort-by-attributes"
+                        ng-if="tablesort.concept=='id' && tablesort.order=='asc'">
+                      </span>
+                      <span class="glyphicon glyphicon-sort-by-attributes-alt"
+                        ng-if="tablesort.concept=='id' && tablesort.order=='desc'">
+                      </span>
+                    </span>
+                    <ul class="dropdown-menu" role="menu">
+                      <li role="presentation" class="dropdown-header">Ordenar por...</li>
+                      <li role="presentation">
+                        <a ng-click="sortTabledata('id', 'asc');" role="menuitem" tabindex="-1">{{ currentEntity }}&nbsp;&nbsp;<i class="glyphicon glyphicon-sort-by-attributes"></i></a>
+                      </li>
+                      <li role="presentation">
+                        <a ng-click="sortTabledata('id', 'desc');" role="menuitem" tabindex="-1">{{ currentEntity }}&nbsp;&nbsp;<i class="glyphicon glyphicon-sort-by-attributes-alt"></i></a>
+                      </li>
+                    </ul>
+                  </span>
+                </th>
+                <th ng-repeat="concepto in data.conceptos" class="header">
+                  <span class="dropdown">
+                    <span data-toggle="dropdown">
+                      {{ concepto.title }}&nbsp;
+                      <b ng-if="tablesort.concept==concepto.name && tablesort.value=='porcentaje'">%</b>
+                      <b ng-if="tablesort.concept==concepto.name && tablesort.value=='monto'">$</b>
+                      <span class="caret" ng-if="tablesort.concept!=concepto.name"></span>
+                      <span class="glyphicon glyphicon-sort-by-attributes"
+                        ng-if="tablesort.concept==concepto.name && tablesort.order=='asc'">
+                      </span>
+                      <span class="glyphicon glyphicon-sort-by-attributes-alt"
+                        ng-if="tablesort.concept==concepto.name && tablesort.order=='desc'">
+                      </span>
+
+                    </span>
+                    <ul class="dropdown-menu" role="menu">
+                      <li role="presentation" class="dropdown-header">Ordenar por...</li>
+                      <li role="presentation">
+                        <a ng-click="sortTabledata(concepto.name, 'desc', 'porcentaje');"
+                        role="menuitem" tabindex="-1">Porcentaje&nbsp;&nbsp;<i class="glyphicon glyphicon-sort-by-attributes-alt"></i></a>
+                      </li>
+                      <li role="presentation">
+                        <a ng-click="sortTabledata(concepto.name, 'asc', 'porcentaje');"
+                        role="menuitem" tabindex="-1">Porcentaje&nbsp;&nbsp;<i class="glyphicon glyphicon-sort-by-attributes"></i></a>
+                      </li>
+
+
+                      <li role="presentation">
+                        <a ng-click="sortTabledata(concepto.name, 'desc', 'monto');"
+                        role="menuitem" tabindex="-1">Monto&nbsp;&nbsp;<i class="glyphicon glyphicon-sort-by-attributes-alt"></i></a>
+                      </li>
+                      <li role="presentation">
+                        <a ng-click="sortTabledata(concepto.name, 'asc', 'monto');"
+                        role="menuitem" tabindex="-1">Monto&nbsp;&nbsp;<i class="glyphicon glyphicon-sort-by-attributes"></i></a>
+                      </li>
+                    </ul>
+                  </span>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr class="info-row" ng-repeat="row in tabledata">
+                <td class="info-entity-cell">
+
+                  <div class="{{ row.texto ? 'info-image-popover' : '' }} "
+                    data-placement="top" data-container="body"
+                    data-title="{{ row.name }}" data-content="{{ row.texto }}"
+                    ng-click='hideInfoPopover();'>
+
+                    <a ng-href="#/{{childrenLink +'/' + row.id | slug}}">
+                    <div ng-if="row.image != undefined"
+                      class="info-entity-cell-photo">
+                      <img ng-src="img/data/{{row.image}}" />
+                    </div>
+                    <div class="info-entity-cell-name">
+                      <div ng-if="showId(row.id)">
+                        <strong>{{row.id}}</strong><br />
+                      </div>
+                      <small>{{row.name.toUpperCase()}}</small>
+                    </div>
+                    </a>
+                  </div>
+                </td>
+
+                <td ng-repeat="concepto in data.conceptos" class="info-entity-cell info-entity-value-{{ concepto.name }}-cell text-right col-md-2">
+                  <a href="#/{{childrenLink}}/{{row.id}}">
+                    $ {{ row.total[concepto.name] | number: 1 }} 
+                    <br/>
+                    <div class="concepto-porcentaje">
+                      {{ row.total['porcentaje_' + concepto.name] | number: 1 }}%
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar {{ concepto.clazz }}" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{row.total['porcentaje_' + concepto.name]+'%'}}">
+                      </div>
+                    </div>
+                  </a>
+                </td>
+
+            </tbody>
+          </table>
+
+          <hr />
+
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Totales</strong>
+                </td>
+
+                <td ng-repeat="concepto in data.conceptos" class="text-right col-md-2">
+                  <strong>$ {{mainEntity.total[concepto.name] | number: 1}}</strong>
+                  <div class="progress">
+                    <div class="progress-bar {{concepto.clazz}} concepto-porcentaje" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{ (mainEntity.total['porcentaje_' + concepto.name]).toFixed(2)+'%'}}">
+                      {{ mainEntity.total['porcentaje_' + concepto.name] | number: 1 }}%
+                    </div>
+                  </div>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>

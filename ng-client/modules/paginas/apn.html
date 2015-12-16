@@ -1,0 +1,44 @@
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43842335-3', 'auto');
+  ga('send', 'pageview');
+
+	</script>
+<style type="text/css">
+	.celda {
+	color: #2b3e50;border: 1px solid #2b3e50;text-align: center;
+	}
+	.tabla{
+	  font-weight: bold;
+  width: 63%;
+  margin-left: 20%;
+	}
+</style>
+<div ng-controller="paginaCtrl">
+  <div class="page-header">
+    <h2>Administracion Publica Nacional</h2>
+  </div>
+  <p>
+	<table width="100%" border="2" cellspacing="2" class="tabla">
+		<tr>
+			<td colspan="4" class="celda">AMBITO</td><td colspan="1" class="celda">PERSONERIA JURIDICA</td>
+		</tr>
+		<tr>
+			<td rowspan="4" colspan="1" class="celda">SECTOR PUBLICO NACIONAL</td><td rowspan="2" colspan="1" class="celda" style="background-color: #69B2E9;">ADMINISTRACION PUBLICA NACIONAL</td><td rowspan="1" colspan="1" class="celda" style="background-color: #69B2E9;">ADMINISTRACION CENTRAL</td><td rowspan="1" colspan="1" class="celda" style="background-color: #69B2E9;">JURISDICCIONES <br><br> -PODER LEGISLATIVO <br> -PODER JUDICIAL <br> -PODER EJECUTIVO <br> -MINISTERIO PUBLICO</td><td rowspan="1" colspan="1" class="celda">UNICA</td>
+		</tr>
+		<tr>
+			<td class="celda" style="background-color: #69B2E9;">ORGANISMOS DESCENTRALIZADOS</td><td class="celda" style="background-color: #69B2E9;">ENTIDADES <br><br> -ORGANISMOS VARIOS<br> -INST. DE SEG. SOCIAL</td><td rowspan="3" colspan="1" class="celda">PROPIA</td>
+		</tr>
+		<tr>
+			<td rowspan="1" colspan="3" class="celda">EMPRESAS Y SOCIEDADES DEL ESTADO</td>
+		</tr>
+		<tr>
+			<td rowspan="1" colspan="3" class="celda">FONDOS FIDUCIARIOS</td>
+		</tr>
+	</table>
+  </p>
+</div>

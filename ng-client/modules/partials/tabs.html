@@ -1,0 +1,77 @@
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43842335-3', 'auto');
+  ga('send', 'pageview');
+
+	</script>
+
+<div ng-if="!mainEntity.children">
+  <div ng-include="'ng-client/modules/partials/nochildren.html'"></div>
+</div>
+
+<div ng-if="mainEntity.children">
+
+<div class="col-md-12" ng-controller="tabsCtrl" ng-init="init()"> <!-- main -->
+  <span id="selectedConceptoForTooltip" style="display:none">{{getConceptoByValue(selectedConcepto)}}</span>
+  <!-- Nav tabs -->
+  <ul id="tabs" class="nav nav-tabs">
+    <li class="active">
+      <a href="#info" ng-click="switchSelect(false)"><i class="glyphicon glyphicon-info-sign"></i> Info</a>
+    </li>
+    <li>
+      <a href="#bubble" ng-click="switchSelect(true)" data-fn="createBubble"><i class="glyphicon glyphicon-record"></i> Burbujas</a>
+    </li>
+    <li>
+      <a href="#treemap" ng-click="switchSelect(true)" data-fn="createTreemap"><i class="glyphicon glyphicon-th-large"></i> Áreas</a>
+    </li>
+    <li>
+      <a href="#bars" ng-click="switchSelect(false)" data-fn="createBars"><i class="glyphicon glyphicon-signal"></i> Barras</a>
+    </li>
+  </ul>
+
+  <div ng-show="canChangeConcepto" class="well well-sm text-right well-selector">
+    Totales según el monto <i class="glyphicon glyphicon-chevron-right"></i>
+    <select ng-model="selectedConcepto" ng-options="c.value as c.text for c in optionsConcepto" ng-change="changeConcepto()"></select>
+  </div>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+    <div class="tab-pane active" id="info" ng-if="mainEntity.children">
+      <!-- panel info -->
+      <div ng-include="'ng-client/modules/partials/info/info.html'"></div>
+    </div>
+
+    <div class="tab-pane" id="bubble">
+      <div class="well well-sm">
+        <i class="glyphicon glyphicon-hand-up"></i>  Haga click en los círculos para navegar su interior. Para volver haga click en el círculo "padre".
+      </div>
+      <div class="bubbletree-wrapper">
+        <div id="bubbletree"></div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="treemap">
+      <div class="well well-sm">
+        <i class="glyphicon glyphicon-hand-up"></i> Pase el puntero sobre las áreas para ver más información. Haga click para ampliar o en el título naranja para volver.
+      </div>
+      <div id="treemap-container"></div>
+    </div>
+
+    <div class="tab-pane" id="bars">
+      <div class="well well-sm">
+        <i class="glyphicon glyphicon-hand-up"></i> Pase el puntero sobre las barras para obtener más inforación.
+      </div>
+      <div class="jumbotron">
+        <div id="chartContainer"></div>
+      </div>
+    </div>
+
+  </div> <!-- tab content -->
+</div> <!-- main -->
+
+</div>
